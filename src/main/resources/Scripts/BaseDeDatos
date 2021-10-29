@@ -1,0 +1,247 @@
+CREATE DATABASE BD_GOLOSINASJULIO;
+--
+USE BD_GOLOSINASJULIO;
+-- LOGIN
+-- TIPO USUARIO
+create table tipo_usuario(
+id_tipo char(1) primary key not null,
+nombre varchar(20)
+);
+-- USUARIO
+create table usuario(
+usuario varchar(45) primary key not null,
+contraseña varchar(45),
+id_tipo char(2)
+);
+alter table usuario add foreign key (id_tipo) references tipo_usuario (id_tipo);
+-- INSERTANDO DATOS EN USUARIO
+insert into tipo_usuario values
+('0', 'Administrativo'),
+('1', 'Operador Ventas'),
+('2', 'Operador Logistica');
+--
+insert into usuario values
+('admin', 'admin','0'),
+('vendedor', 'vendedor','1'),
+('almacenero', 'almacenero','2');
+--
+Select usuario, contraseña from usuario where usuario='vendedor';
+-- consultando los usuario y los tipo usuario
+select u.usuario, u.contraseña, tu.nombre from usuario as u inner join tipo_usuario tu on u.id_tipo=tu.id_tipo;
+-- CARGO
+CREATE TABLE CARGO
+(
+ COD_CARGO CHAR(2) PRIMARY KEY CHECK(COD_CARGO LIKE 'C%') NOT NULL,
+ NOMBRE VARCHAR(20) NOT NULL
+);
+CREATE TABLE DISTRITO
+(
+COD_DIS CHAR(3) PRIMARY KEY CHECK(COD_DIS LIKE 'D%' ) NOT NULL,
+NOMBRE VARCHAR(30) NOT NULL
+);
+CREATE TABLE EMPLEADO
+(
+ COD_EMP CHAR(5) PRIMARY KEY CHECK(COD_EMP LIKE 'EMP%') NOT NULL,
+ NOMBRE VARCHAR(50) NOT NULL,
+ DNI CHAR(8) UNIQUE NOT NULL,
+ TELEFONO CHAR(9) UNIQUE DEFAULT '000000000',
+ DIRECCION VARCHAR(100),
+ COD_DIS CHAR(3),
+ COD_CARGO CHAR(2)
+);
+ALTER TABLE EMPLEADO ADD FOREIGN KEY (COD_DIS) REFERENCES DISTRITO(COD_DIS);
+ALTER TABLE EMPLEADO ADD FOREIGN KEY (COD_CARGO) REFERENCES CARGO(COD_CARGO);
+
+CREATE TABLE PROVEEDOR
+(
+ RUC CHAR(11) PRIMARY KEY CHECK(RUC LIKE '2%')   NOT NULL,
+ NOMBRE VARCHAR(30) UNIQUE,
+ NOMBRE_CONTACTO VARCHAR(40) NOT NULL,
+ TELEFONO_CONTACTO VARCHAR(9) UNIQUE DEFAULT '000000000',
+ DIRECCION VARCHAR(100),
+ COD_DIS CHAR(3)
+);
+ALTER TABLE PROVEEDOR ADD FOREIGN KEY (COD_DIS) REFERENCES DISTRITO(COD_DIS);
+
+CREATE TABLE MARCA
+(
+ COD_MAR CHAR(4) PRIMARY KEY CHECK(COD_MAR LIKE 'MA%') NOT NULL,
+ NOM_MAR VARCHAR(30)
+);
+
+----------------------------- NOTA DE PEDIDO DE VENTA---------------------------
+CREATE TABLE CLIENTE 
+(
+ DNI CHAR(8) UNIQUE,
+ NOMBRE VARCHAR(100) NOT NULL,
+ TELEFONO VARCHAR(9) UNIQUE DEFAULT '000000000',
+ DIRECCION VARCHAR(100),
+ COD_DIS CHAR(3)
+);
+ALTER TABLE CLIENTE ADD FOREIGN KEY (COD_DIS) REFERENCES DISTRITO(COD_DIS);
+
+CREATE TABLE VENTA
+(
+ COD_NOTAPED CHAR(4) PRIMARY KEY NOT NULL,
+ DNI CHAR(8),
+ COD_EMP CHAR(5),
+ FECHA_PED DATE NULL,
+ MONTO DECIMAL(8,2)
+);
+ALTER TABLE VENTA ADD FOREIGN KEY (DNI) REFERENCES CLIENTE(DNI);
+ALTER TABLE VENTA ADD FOREIGN KEY (COD_EMP) REFERENCES EMPLEADO(COD_EMP);
+
+CREATE TABLE PRODUCTO
+(
+ COD_PRO CHAR(6) PRIMARY KEY CHECK(COD_PRO LIKE 'PRO%') NOT NULL,
+ NOM_PRO VARCHAR(30),
+ PRECIO_VENTA DECIMAL(8,2),
+ STOCK INT,
+ COD_MAR CHAR(4)
+);
+ALTER TABLE PRODUCTO ADD FOREIGN KEY (COD_MAR) REFERENCES MARCA(COD_MAR);
+
+CREATE TABLE PROVEEDOR_PRODUCTO
+(
+ RUC CHAR(11) ,
+ COD_PRO CHAR(6)
+);
+ALTER TABLE PROVEEDOR_PRODUCTO ADD FOREIGN KEY (RUC) REFERENCES PROVEEDOR(RUC);
+ALTER TABLE PROVEEDOR_PRODUCTO ADD FOREIGN KEY (COD_PRO) REFERENCES PRODUCTO(COD_PRO);
+
+CREATE TABLE DETALLE_VENTA
+(
+ COD_NOTAPED CHAR(4),
+ COD_PRO CHAR(6),
+ CANTIDAD_PRO INT NOT NULL,
+ SUBTOTAL DECIMAL(8,2)
+);
+ALTER TABLE DETALLE_VENTA ADD FOREIGN KEY (COD_NOTAPED) REFERENCES VENTA(COD_NOTAPED);
+ALTER TABLE DETALLE_VENTA ADD FOREIGN KEY (COD_PRO) REFERENCES PRODUCTO(COD_PRO);
+-------------------------- BOLETA DE COMPRA(PROVEEDOR)-----------------------------
+CREATE TABLE COMPRA
+(
+ COD_BO CHAR(13) PRIMARY KEY NOT NULL,
+ TIPO_COMPRO VARCHAR(30) CHECK(TIPO_COMPRO IN('BOLETA','FACTURA')),
+ RUC CHAR(11),
+ COD_EMP CHAR(5),
+ TIPO_PAGO VARCHAR(10) CHECK(TIPO_PAGO IN('EFECTIVO','CREDITO')),
+ FECHA_EMI DATE NOT NULL,
+ FECHA_REPARTO DATE NOT NULL,
+ VENCIMIENTO DATE,
+ MONTO DECIMAL(8,2)
+);
+ALTER TABLE COMPRA ADD FOREIGN KEY (RUC) REFERENCES PROVEEDOR(RUC);
+ALTER TABLE COMPRA ADD FOREIGN KEY (COD_EMP) REFERENCES EMPLEADO(COD_EMP);
+--
+CREATE TABLE DETALLE_COMPRA
+(
+ COD_BO CHAR(13),
+ COD_PRO CHAR(6),
+ PRECIO_COMPRA DECIMAL(8,2),
+ CANTIDAD INT,
+ DESCUENTO DECIMAL(8,2),
+ SUBTOTAL DECIMAL(8,2)
+);
+ALTER TABLE DETALLE_COMPRA ADD FOREIGN KEY (COD_BO) REFERENCES COMPRA(COD_BO);
+ALTER TABLE DETALLE_COMPRA ADD FOREIGN KEY (COD_PRO) REFERENCES PRODUCTO(COD_PRO);
+
+-- INSERTANDO CARGO
+INSERT INTO CARGO VALUES 
+('C1', 'ENCARGADO DE ALMACÉN'),
+('C2', 'VENDEDOR'),
+('C3', 'JEFE');
+-- INSERTANDO DISTRITO
+INSERT DISTRITO VALUES 
+('D01', 'MIRAFLORES'),('D02', 'SAN ISIDRO'),('D03', 'PUEBLO LIBRE'),('D04', 'SAN MIGUEL'),('D05', 'MAGDALENA DEL MAR'),
+('D06', 'CALLAO'),('D07', 'SANTIAGO DE SURCO'),('D08', 'LA MOLINA'),('D09', 'LA VICTORIA'),('D10', 'LOS OLIVOS'),
+('D11', 'SAN BORJA'),('D12', 'ATE VITARTE'),('D13', 'LIMA'),('D14', 'S.J.L'),('D15', 'SANTA ANITA'),
+('D16', 'SAN MARTIN DE PORRES') ,('D17', 'PACHACAMAC') ,('D18', 'CARABAYLLO') ,('D19', 'PUENTE PIEDRA') ,
+('D20', 'CHORRILLOS') ,('D21', 'SAN LUIS') ,('D22', 'SURQUILLO') ,('D23', 'BRENIA') ,('D24', 'LINCE') ,
+('D25', 'JESUS MARIA') ,('D26', 'EL AGUSTINO') ,('D27', 'ANCON') ,('D28', 'BARRANCO') ,('D29', 'CHACLACAYO') ,
+('D30', 'CIENEGUILLA') ,('D31', 'COMAS') ,('D32', 'INDEPENDENCIA') ,('D33', 'LURIGANCHO') ,('D34', 'LURIN') ,
+('D35', 'PUCUSANA') ,('D36', 'PUNTA HERMOSA') ,('D37', 'PUNTA NEGRA') ,('D38', 'RIMAC') ,('D39', 'SAN BARTOLO') ,
+('D40', 'SAN JUAN DE MIRAFLORES') ,('D41', 'SANTA MARIA DEL MAR') ,('D42', 'SANTA ROSA') ,('D43', 'VILLA EL SALVADOR') ,
+('D44', 'VILLA MARIA DEL TRIUNFO');
+-- INSERTANDO MARCAS
+INSERT MARCA VALUES 
+('MA01','COSTA'),('MA02','NESTLE'),('MA03','AMBROSOLI'),('MA04','FIELD'),('MA05','VICTORIA'),('MA06','DIA'),
+('MA07','SAYON'),('MA08','CREMINO'),('MA09','COLOMBINA'),('MA10','RICAS'),('MA11','DOS CERRITOS'),('MA12','TORRINO'),
+('MA13','BIMBO'),('MA14','CONFITECA'),('MA15','SUPER'),('MA16','COMPANY'),('MA17','ADAMS'),('MA18','LAYS'),('MA19','ARCOR'),
+('MA20','CAMPO'),('MA21','SAN JORGE'),('MA22','PEPSICO'),('MA23','KR'),('MA24','CONCORDIA'),('MA25','WINTER'),
+('MA26','COCA COLA'),('MA27','TROME'),('MA28','KARINTO'),('MA29','GLORIA'),('MA30','LIVE'),('MA31','YOLEIT'),
+('MA32','HAMILTON'),('MA33','PALL MALL'),('MA34','LUCKY STRIKE'),('MA35','GOLDEN BEACH'),('MA36','MABELS'),('MA37','ANGEL'),
+('MA38','DEYELLI'),('MA39','ELVAN'),('MA40','MUNDO CANDY'),('MA41','AREQUEPAY'),('MA42','CHAPLIN'),('MA43','OTROS');
+-- INSERTANDO EMPLEADOS
+INSERT EMPLEADO VALUES
+('EMP01', 'MAYRA ANDRADE', '49782451', 967890256,'GAMBETTA BAJA MZ.D LT.5','D06', 'C2'),
+('EMP02', 'ANTONIO PAVON', '56472463', 987416734, 'GAMBETTA BAJA MZ.C1 LT.24','D06', 'C1'),
+('EMP03', 'HUGO CHAVEZ', '71526374',931456628, 'GAMBETTA BAJA MZ.L LT.10','D06', 'C1'),
+('EMP04', 'MARIA MAURICIO', '70187264', 995636813, 'GAMBETTA BAJA MZ.C LT.32','D06', 'C2'),
+('EMP05', 'CRYSTAL PILLACA', '76946452',945038120, 'GAMBETTA ALTA MZ.C LT.34','D06', 'C2'),
+('EMP06', 'PATRICIA CASTILLO','25761448', 998071076, 'GAMBETTA ALTA MZ.C LT.34','D06', 'C3'),
+('EMP07', 'JULIO PILLACA', '25743882',995855999, 'GAMBETTA ALTA MZ.C LT.34','D06', 'C3');
+-- INSERTANDO PROVEEDORES
+INSERT PROVEEDOR VALUES 
+('27594637804','RTM COMERCIAL S.A.C','CARLOS VILCHEZ','011745678','NICOLAS AYLLON 2925','D12'),
+('23574869504','INVERSIONES CAMPO','ARTURA CEGARRA','992434525','Los Pinos E1 7','D14'),
+('23645375866','ALICORP','MARCOS VALDIVIA','017158560','JOSÉ SANTOS CHOCANO 545 SAN JOAQUIN','D03'),
+('27545856484','NABISCO','ESTEFANÍA VALDEZ','983783378','REPUBLICA VENEZUELA 2470','D13');
+-- INSERTANDO PRODUCTOS
+INSERT INTO PRODUCTO VALUES
+('PRO001','CHOCODONUTS X6',3.30,40,'MA01'),
+('PRO002','CARITAS X6',2.50,60,'MA01'),
+('PRO003','SUBLIME CLÁSICO',27.50,50,'MA02'),
+('PRO004','TRIANGULO X22',27.00,30,'MA02'),
+('PRO005','FULL LIMON X24',10.00,70,'MA03'),
+('PRO006','MENTITA X24',10.00,50,'MA03'),
+('PRO007','OREO x6',3.50,100,'MA04'),
+('PRO008','CHARADA x6',3.50,80,'MA04');
+-- INSERTANTO CLIENTES
+INSERT INTO CLIENTE VALUES
+('77363475','Jessica Choque', '406956047',  'Avenida José Granda 3896', 'D15'),
+('84090975', 'Ericka Arevalo', '841394704', 'Calle Las Vegas, Mz. A32 - Lt. 21  Urb. Primavera',  'D16'),
+('71928391', 'Lauren Jauregui', '424182111', 'Avenida Mexico 454', 'D09'),
+('45579790', 'Camila Cabello', '020389550', 'Jiron Lino Cornejo 220  Int. 115', 'D13'),
+('37495161', 'Oliver Montaño', '331022732', 'Avenida Argentina 6304', 'D06'),
+('76312840', 'Pedro Angel Hernandez', 956232345,'Av Independencia 234','D02'),
+('72864779', 'Mauro Jessem', '346933021' , 'Calle Chasuta 2345', 'D13'),
+('95336495', 'Jhon Frank Benancio', '774967397', 'Calle Z 350  Urb. Santa Rosa de Surco', 'D07'),
+('77813679', 'Luis Vargas', '392596341', 'Mz H LT 16  APV EL PRADO', 'D18'),
+('93895030', 'Antonio Mauricio', '142292531', 'Calle 2 Mz. C  Urb. Industrial La Merced', 'D12'),
+('63349768', 'Yenny Elizabeth', '967387188', 'Avenida Daniel Alcides Carrión 298  Int. 2 Urb. Santa Clara', 'D12'),
+('40267251', 'Milagros Peña', '190914128', 'Urbanizacion Provivienda Residencial El Prado Mz. G LT. 15', 'D19'),
+('10443055', 'Jack Jonathan', '921058580', 'Asoc. De vivienda Las Mercedes de Puente Piedra .  Mz. E Lote 06', 'D19'),
+('70088438', 'Victor Castillo', '582342576', 'Avenida Naciones Unidas 1729  Chacra Ríos Norte', 'D13'),
+('06752457', 'Alex Valdivia', '945945372', 'Alameda Los Horizontes 212', 'D20'),
+('99383643', 'Olson Harold', '426207611', ' Avenida Jorge Vanderghen 241', 'D01'),
+('25045033', 'Jason Derullo', '126033207', ' Avenida Víctor Alzamora 225', 'D22'),
+('32137695', 'Graciela Andrea', '288523852', ' Avenida Nicolás Arriola 3050', 'D21'),
+('87591024', 'Andrea Maguiña', '716072398', ' Coronel Casimiro de la Fuente Negrón 390', 'D09'),
+('17515879', 'Elizabeth Nieves', '613781584', ' Jiron Pastaza 1071', 'D23'),
+('08328164', 'Jaime Díaz', '280644051', ' Avenida Tomas Marsano 3637', 'D07'),
+('10763024', 'Valery Goñez', '921084251', ' Avenida La Molina Este 4265  Urb. Sol De La Molina', 'D08'),
+('21286924', 'Pablo Aira', '113763515', ' Avenida Separadora Industrial 3278  Mayorazgo Chico, Ate - Lima', 'D12'),
+('48767073', 'Yeni Ortega', '831650440', ' Avenida Manuel Tovar 430', 'D01'),
+('75065778', 'Vivian Prado', '406957047', ' Avenida Isabel La Católica 340', 'D09'),
+('93296373', 'Mariela Ardela', '329691489', ' Avenida Principal 503', 'D22'),
+('32131107', 'Angie Nestares', '429477524', ' Avenida Nicolas Arriola 2324', 'D21'),
+('01102644', 'Guadalupe Trinidad', '795788612', ' Avenida Tomás Marsano 4203', 'D07'),
+('24951899', 'Angelica Cadenillas', '738041696', ' Pasaje Mario Urteaga 153', 'D11'),
+('24466185', 'Nicole Ipanaque', '455137997', ' Avenida Abraham Lincoln 377  Altura 19 Av. La Mar', 'D03'),
+('25215957', 'Manuel Buenaventura', '295745970', ' Jiron José Orengo 850', 'D21'),
+('83884517', 'Jhair Namuche', '867666383', ' Jiron Emilio Althaus 788', 'D24'),
+('79094687', 'Alejandra De la Cruz', '532910111', 'Avenida General Garzon 1558', 'D25'),
+('83511279', 'Jorge Palma', '042856504', 'Jiron Antonio Raymondi 326  Interior 113', 'D09'),
+('00273096', 'Johan Adriazola', '555102207', 'Avenida ferrocarril s/n  Mz. H Lt. 7', 'D26'),
+('67140654', 'Yovana Chinga', '762951515', 'Calle Bajada Balta 159  Alt. Cdra. 1 Av. Schell', 'D01'),
+('81769040', 'Roxana Castillo', '834197140', ' Avenida Canevaro 1085', 'D24'),
+('65451037', 'Diana Flores', '871611587', ' Avenida Néstor Gambeta 6855  Prov. Const. Del Callao', 'D06'),
+('20091861', 'Luis Carlos Rejas', '370225855', ' Avenida La Molina 492', 'D12'),
+('92322743', 'Nataly Espinoza', '217334328', ' Jiron Domingo Orue 792', 'D22'),
+('31330220', 'Anderson Cerrón', '062166445', ' Calle Los Mártires Mz O L  Pj. Mateo Pumacahua', 'D07'),
+('03732151', 'Lucía Melendez', '940629037', ' Urbanizacion La Cruceta Bloque  Dpto 501', 'D07'),
+('86783966', 'Esther Saavedra', '557581011', ' Calle Volcán Misti Mz.H13 Lt.1C  Urb. Las Delicias de Villa', 'D20'),
+('30386606', 'Antuannet Merino', '201369891', ' Avenida Paseo de la República 291  Ofic. 701. Edif. Anglo-Peruano.', 'D13'),
+('72660486', 'Luis Carlos Burga', '452032156', ' Avenida Iquitos 110  Tda 117', 'D09'),
+('09768561', 'Liliana Moreno', '312994716', ' Jiron Leoncio Prado 1098', 'D05');
