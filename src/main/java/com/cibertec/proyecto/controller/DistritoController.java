@@ -12,6 +12,7 @@ import com.cibertec.proyecto.service.DistritoService;
 @RestController
 @RequestMapping("/distrito")
 public class DistritoController {
+	
 	@Autowired
 	private DistritoService distritoService;
 	
