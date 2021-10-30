@@ -31,7 +31,7 @@ public class ClienteController {
 		clienteService.registrar(bean);
 	}
 	@DeleteMapping("/eliminar/{id}")
-	public void eliminar(@RequestBody String id) {
+	public void eliminar(@PathVariable String id) {
 		clienteService.eliminar(id);
 	}
 }
