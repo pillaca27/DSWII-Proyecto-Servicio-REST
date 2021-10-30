@@ -1,9 +1,14 @@
 package com.cibertec.proyecto.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author ENZO GONZALES
@@ -19,9 +24,9 @@ public class Cargo {
 	@Column(name = "nombre")
 	private String nombre;
 	
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "cargo")
-//	private List<Empleado> listaEmpleado;
+	@JsonIgnore
+	@OneToMany(mappedBy = "cargo")
+	private List<Empleado> listaEmpleado;
 
 	public String getCodCargo() {
 		return codCargo;

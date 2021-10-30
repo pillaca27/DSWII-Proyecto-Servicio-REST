@@ -3,6 +3,8 @@ package com.cibertec.proyecto.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,12 +29,10 @@ public class Empleado {
 	private String direccion;
 	@Column(name = "cod_Dis")
 	private String codDis;
-	@Column(name = "cod_Cargo")
-	private String codCargo;
 
-//	@ManyToOne
-//	@JoinColumn(name = "cod_cargo")
-//	private Cargo cargo;
+	@ManyToOne
+	@JoinColumn(name = "cod_cargo")
+	private Cargo cargo;
 
 	public String getCodEmp() {
 		return codEmp;
@@ -82,12 +82,12 @@ public class Empleado {
 		this.codDis = codDis;
 	}
 
-	public String getCodCargo() {
-		return codCargo;
+	public Cargo getCargo() {
+		return cargo;
 	}
 
-	public void setCodCargo(String codCargo) {
-		this.codCargo = codCargo;
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
 	}
 	
 	
