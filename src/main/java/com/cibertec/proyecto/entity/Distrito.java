@@ -1,9 +1,14 @@
 package com.cibertec.proyecto.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author ANGELO CHOQUE
@@ -19,7 +24,10 @@ public class Distrito {
 	private String codigo;
 	@Column(name = "nombre")
 	private String nombre;
-
+	@JsonIgnore
+	@OneToMany(mappedBy = "distrito")
+	private List<Cliente> listaDistritos;
+	
 	public String getCodigo() {
 		return codigo;
 	}
@@ -36,6 +44,14 @@ public class Distrito {
 		this.nombre = nombre;
 	}
 
+
+	public List<Cliente> getListaDistritos() {
+		return listaDistritos;
+	}
+
+	public void setListaDistritos(List<Cliente> listaDistritos) {
+		this.listaDistritos = listaDistritos;
+	}
 
 
 	
