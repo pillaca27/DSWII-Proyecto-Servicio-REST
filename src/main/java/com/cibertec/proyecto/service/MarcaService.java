@@ -17,4 +17,12 @@ public class MarcaService {
 	 public List<Marca> listAll(){
 		 return marcaDAO.findAll();
 	 }
+
+	public void registrar(Marca bean) {
+		marcaDAO.save(bean);
+	}
+
+	public void eliminar(String id) {
+		marcaDAO.deleteById(id);
+	}
 }

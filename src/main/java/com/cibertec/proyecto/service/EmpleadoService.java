@@ -18,4 +18,14 @@ public class EmpleadoService{
 		 return empleadoDAO.findAll();
 	 }
 
+	public void registrar(Empleado bean) {
+		empleadoDAO.save(bean);
+		
+	}
+
+	public void eliminar(String id) {
+		empleadoDAO.deleteById(id);
+		
+	}
+
 }

@@ -21,5 +21,6 @@ public class CargoController {
 		public List<Cargo> listar() {
 			return cargoService.listAll();
 		}
+		
 
 }

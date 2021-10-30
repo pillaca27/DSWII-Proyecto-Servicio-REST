@@ -17,5 +17,12 @@ public class ProductoService {
 	public List<Producto> listAll(){
 		return productoDAO.findAll();
 	}
-	
+
+	public void registrar(Producto bean) {
+		productoDAO.save(bean);
+    }
+
+	public void eliminar(String id) {
+		productoDAO.deleteById(id);
+	}
 }

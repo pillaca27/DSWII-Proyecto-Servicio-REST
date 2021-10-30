@@ -12,30 +12,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cibertec.proyecto.service.CompraService;
-
-import com.cibertec.proyecto.entity.Compra;
+import com.cibertec.proyecto.entity.Venta;
+import com.cibertec.proyecto.service.VentaService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/compra")
-public class CompraController {
-	@Autowired
-	private CompraService compraService;
+@RequestMapping("/venta")
+public class VentaController {
 	
-	@GetMapping("/listar")
-	public List<Compra> listar(){
-		return compraService.listAll();
+	@Autowired
+	private VentaService ventaService;
+	
+	@GetMapping("/lista")
+	public List<Venta> listado(){
+		return ventaService.listadoVenta();
 	}
 	
 	@PostMapping("/registrar")
-	public void registrar(@RequestBody Compra a) {
-		compraService.registrar(a);
+	public void registrar(@RequestBody Venta bean) {
+		ventaService.registrar(bean);
 	}
 	
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable String id) {
-		compraService.eliminar(id);
+		ventaService.eliminar(id);
 	}
-	
+
 }
