@@ -27,8 +27,10 @@ public class Empleado {
 	private String telefono;
 	@Column(name = "direccion")
 	private String direccion;
-	@Column(name = "cod_Dis")
-	private String codDis;
+	
+	@ManyToOne
+	@JoinColumn(name = "codDis")
+	private Distrito distrito;
 
 	@ManyToOne
 	@JoinColumn(name = "cod_cargo")
@@ -74,12 +76,12 @@ public class Empleado {
 		this.direccion = direccion;
 	}
 
-	public String getCodDis() {
-		return codDis;
+	public Distrito getDistrito() {
+		return distrito;
 	}
 
-	public void setCodDis(String codDis) {
-		this.codDis = codDis;
+	public void setDistrito(Distrito distrito) {
+		this.distrito = distrito;
 	}
 
 	public Cargo getCargo() {
