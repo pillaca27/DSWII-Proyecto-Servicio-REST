@@ -1,0 +1,21 @@
+package com.cibertec.proyecto.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cibertec.proyecto.entity.Usuario;
+import com.cibertec.proyecto.repository.UsuarioDAO;
+
+@Service
+public class UsuarioService {
+	
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+	
+	public List<Usuario> listaAll(){
+		return usuarioDAO.findAll();
+	}
+
+}
