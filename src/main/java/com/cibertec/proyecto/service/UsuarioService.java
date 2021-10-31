@@ -18,4 +18,11 @@ public class UsuarioService {
 		return usuarioDAO.findAll();
 	}
 
+	public void registrar(Usuario bean) {
+		usuarioDAO.save(bean);
+	}
+
+	public void eliminar(String id) {
+		usuarioDAO.deleteById(id);
+	}
 }
