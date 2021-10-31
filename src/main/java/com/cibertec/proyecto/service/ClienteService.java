@@ -19,6 +19,11 @@ public class ClienteService {
 	public List<Cliente> listAll(){
 		return clienteDAO.findAll();
 	}
+	
+	public List<Cliente> listarClientes(String nombre){
+		return clienteDAO.findByClienteLike(nombre+"%");
+	}
+	
 	public void eliminar(String id) {
 	clienteDAO.deleteById(id);
 	}

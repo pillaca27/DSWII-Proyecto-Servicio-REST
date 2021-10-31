@@ -25,6 +25,11 @@ public class ClienteController {
 	public List<Cliente> listar(){
 		return clienteService.listAll();
 	}
+	//http://localhost:8091/cliente/consulta/e
+	@GetMapping("/consulta/{nombre}")
+	public List<Cliente> consulta(@PathVariable("nombre") String nombre){
+		return clienteService.listarClientes(nombre);
+	}
 
 	@PostMapping("/registrar")
 	public void registrar(@RequestBody Cliente bean) {
