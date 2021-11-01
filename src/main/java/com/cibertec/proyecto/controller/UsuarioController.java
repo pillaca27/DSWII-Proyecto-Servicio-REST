@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ public class UsuarioController {
 	public List<Usuario> listarUsuario(){
 		return usuarioService.listaAll();
 	}
+	
 	@PostMapping("/registrar")
 	public void registrar(@RequestBody Usuario bean) {
 		usuarioService.registrar(bean);
@@ -34,5 +36,10 @@ public class UsuarioController {
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable String id) {
 		usuarioService.eliminar(id);
+	}
+	
+	@RequestMapping("/lista/{nombre}")
+	public Usuario listadoUserName(@PathVariable("nombre") String vlogin){
+		return usuarioService.iniciaSesion(vlogin);
 	}
 }

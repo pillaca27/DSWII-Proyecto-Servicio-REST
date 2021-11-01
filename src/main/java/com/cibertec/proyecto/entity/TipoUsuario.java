@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class TipoUsuario {
 	@Id
 	@Column(name="id_tipo")
-	private String codigo;
+	private int codigo;
 	@Column(name="nombre")
 	private String nombre;
 	
@@ -28,11 +28,11 @@ public class TipoUsuario {
 	@OneToMany(mappedBy = "tipo")
 	private List<Usuario> listaUsuario;
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 

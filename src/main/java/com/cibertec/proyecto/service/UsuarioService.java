@@ -25,4 +25,8 @@ public class UsuarioService {
 	public void eliminar(String id) {
 		usuarioDAO.deleteById(id);
 	}
+	
+	public Usuario iniciaSesion(String vLogin) {
+		return usuarioDAO.iniciarSesion(vLogin);
+	}
 }

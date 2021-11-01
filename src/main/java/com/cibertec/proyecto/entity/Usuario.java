@@ -15,14 +15,26 @@ import javax.persistence.Table;
 @Table(name="usuario")
 public class Usuario {
 	@Id
+	@Column(name = "cod_usuario")
+	private int codUsuario;
+	
 	@Column(name = "usuario")
 	private String usuario;
-	@Column (name = "contraseña")
+	
+	@Column (name = "contrasena")
 	private String password;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_tipo")
 	private TipoUsuario tipo;
+
+	public int getCodUsuario() {
+		return codUsuario;
+	}
+
+	public void setCodUsuario(int codUsuario) {
+		this.codUsuario = codUsuario;
+	}
 
 	public String getUsuario() {
 		return usuario;
@@ -47,6 +59,8 @@ public class Usuario {
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
+
+	
 	
 	
 
