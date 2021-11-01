@@ -3,6 +3,7 @@ package com.cibertec.proyecto.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cibertec.proyecto.entity.Usuario;
@@ -14,11 +15,15 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEnconder;
+	
 	public List<Usuario> listaAll(){
 		return usuarioDAO.findAll();
 	}
 
 	public void registrar(Usuario bean) {
+		bean.setPassword(passwordEnconder.encode(bean.getPassword()));
 		usuarioDAO.save(bean);
 	}
 
