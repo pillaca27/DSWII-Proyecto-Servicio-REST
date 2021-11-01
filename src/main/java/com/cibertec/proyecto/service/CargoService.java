@@ -25,4 +25,10 @@ public class CargoService {
 		public void eliminar(String id) {
 			cargoDAO.deleteById(id);
 		}
+		
+		public Cargo buscar(String id) {
+			 return cargoDAO.findById(id).orElse(null);
+
+			
+		}
 }
