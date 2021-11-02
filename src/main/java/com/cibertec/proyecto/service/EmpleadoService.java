@@ -27,5 +27,10 @@ public class EmpleadoService{
 		empleadoDAO.deleteById(id);
 		
 	}
+	
+	public List<Empleado> buscarEmpleadosPorCargo(String codCargo){
+		return empleadoDAO.findEmpleadoByCargo(codCargo);
+	}
+
 
 }

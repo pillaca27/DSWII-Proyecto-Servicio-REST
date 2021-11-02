@@ -2,6 +2,7 @@ package com.cibertec.proyecto.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.proyecto.entity.Cliente;
 import com.cibertec.proyecto.service.ClienteService;
+
 @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/cliente")
@@ -38,5 +40,10 @@ public class ClienteController {
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable String id) {
 		clienteService.eliminar(id);
+	}
+	
+	@GetMapping("/consultaCliente/{codDis}")
+	public List<Cliente> consultaPorDistrito(@PathVariable("codDis") String cod){
+		return clienteService.buscarClientesPorDistrito(cod);
 	}
 }

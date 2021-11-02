@@ -28,4 +28,8 @@ public class ClienteService {
 	clienteDAO.deleteById(id);
 	}
 	
+	public List<Cliente> buscarClientesPorDistrito(String codDis){
+		return clienteDAO.findClienteByDistrito(codDis);
+	}
+
 }
