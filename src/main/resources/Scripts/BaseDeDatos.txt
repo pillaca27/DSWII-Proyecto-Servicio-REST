@@ -4,30 +4,25 @@ USE BD_GOLOSINASJULIO;
 -- LOGIN
 -- TIPO USUARIO
 create table tipo_usuario(
-id_tipo char(1) primary key not null,
+id_tipo int primary key not null,
 nombre varchar(20)
 );
 -- USUARIO
 create table usuario(
-usuario varchar(45) primary key not null,
-contraseÒa varchar(45),
-id_tipo char(2)
+cod_usuario int primary key not null,
+usuario varchar(45),
+contrasena varchar(255),
+id_tipo int
 );
 alter table usuario add foreign key (id_tipo) references tipo_usuario (id_tipo);
 -- INSERTANDO DATOS EN USUARIO
 insert into tipo_usuario values
-('0', 'Administrativo'),
-('1', 'Operador Ventas'),
-('2', 'Operador Logistica');
+('1', 'Administrativo'),
+('2', 'Operador Ventas'),
+('3', 'Operador Logistica');
 --
 insert into usuario values
-('admin', 'admin','0'),
-('vendedor', 'vendedor','1'),
-('almacenero', 'almacenero','2');
---
-Select usuario, contraseÒa from usuario where usuario='vendedor';
--- consultando los usuario y los tipo usuario
-select u.usuario, u.contraseÒa, tu.nombre from usuario as u inner join tipo_usuario tu on u.id_tipo=tu.id_tipo;
+(1,'admin', '$2a$10$.5ysKIwEDJcK7.lEPsEgG.mFB2SicBMI/vxUOeBmIueI5rYbTw/mS','1');
 -- CARGO
 CREATE TABLE CARGO
 (
@@ -148,7 +143,7 @@ ALTER TABLE DETALLE_COMPRA ADD FOREIGN KEY (COD_PRO) REFERENCES PRODUCTO(COD_PRO
 
 -- INSERTANDO CARGO
 INSERT INTO CARGO VALUES 
-('C1', 'ENCARGADO DE ALMAC…N'),
+('C1', 'ENCARGADO DE ALMAC√âN'),
 ('C2', 'VENDEDOR'),
 ('C3', 'JEFE');
 -- INSERTANDO DISTRITO
@@ -185,13 +180,13 @@ INSERT EMPLEADO VALUES
 INSERT PROVEEDOR VALUES 
 ('27594637804','RTM COMERCIAL S.A.C','CARLOS VILCHEZ','011745678','NICOLAS AYLLON 2925','D12'),
 ('23574869504','INVERSIONES CAMPO','ARTURA CEGARRA','992434525','Los Pinos E1 7','D14'),
-('23645375866','ALICORP','MARCOS VALDIVIA','017158560','JOS… SANTOS CHOCANO 545 SAN JOAQUIN','D03'),
-('27545856484','NABISCO','ESTEFANÕA VALDEZ','983783378','REPUBLICA VENEZUELA 2470','D13');
+('23645375866','ALICORP','MARCOS VALDIVIA','017158560','JOS√â SANTOS CHOCANO 545 SAN JOAQUIN','D03'),
+('27545856484','NABISCO','ESTEFAN√çA VALDEZ','983783378','REPUBLICA VENEZUELA 2470','D13');
 -- INSERTANDO PRODUCTOS
 INSERT INTO PRODUCTO VALUES
 ('PRO001','CHOCODONUTS X6',3.30,40,'MA01'),
 ('PRO002','CARITAS X6',2.50,60,'MA01'),
-('PRO003','SUBLIME CL¡SICO',27.50,50,'MA02'),
+('PRO003','SUBLIME CL√ÅSICO',27.50,50,'MA02'),
 ('PRO004','TRIANGULO X22',27.00,30,'MA02'),
 ('PRO005','FULL LIMON X24',10.00,70,'MA03'),
 ('PRO006','MENTITA X24',10.00,50,'MA03'),
@@ -199,49 +194,54 @@ INSERT INTO PRODUCTO VALUES
 ('PRO008','CHARADA x6',3.50,80,'MA04');
 -- INSERTANTO CLIENTES
 INSERT INTO CLIENTE VALUES
-('77363475','Jessica Choque', '406956047',  'Avenida JosÈ Granda 3896', 'D15'),
+('77363475','Jessica Choque', '406956047',  'Avenida Jos√© Granda 3896', 'D15'),
 ('84090975', 'Ericka Arevalo', '841394704', 'Calle Las Vegas, Mz. A32 - Lt. 21  Urb. Primavera',  'D16'),
 ('71928391', 'Lauren Jauregui', '424182111', 'Avenida Mexico 454', 'D09'),
 ('45579790', 'Camila Cabello', '020389550', 'Jiron Lino Cornejo 220  Int. 115', 'D13'),
-('37495161', 'Oliver MontaÒo', '331022732', 'Avenida Argentina 6304', 'D06'),
+('37495161', 'Oliver Monta√±o', '331022732', 'Avenida Argentina 6304', 'D06'),
 ('76312840', 'Pedro Angel Hernandez', 956232345,'Av Independencia 234','D02'),
 ('72864779', 'Mauro Jessem', '346933021' , 'Calle Chasuta 2345', 'D13'),
 ('95336495', 'Jhon Frank Benancio', '774967397', 'Calle Z 350  Urb. Santa Rosa de Surco', 'D07'),
 ('77813679', 'Luis Vargas', '392596341', 'Mz H LT 16  APV EL PRADO', 'D18'),
 ('93895030', 'Antonio Mauricio', '142292531', 'Calle 2 Mz. C  Urb. Industrial La Merced', 'D12'),
-('63349768', 'Yenny Elizabeth', '967387188', 'Avenida Daniel Alcides CarriÛn 298  Int. 2 Urb. Santa Clara', 'D12'),
-('40267251', 'Milagros PeÒa', '190914128', 'Urbanizacion Provivienda Residencial El Prado Mz. G LT. 15', 'D19'),
+('63349768', 'Yenny Elizabeth', '967387188', 'Avenida Daniel Alcides Carri√≥n 298  Int. 2 Urb. Santa Clara', 'D12'),
+('40267251', 'Milagros Pe√±a', '190914128', 'Urbanizacion Provivienda Residencial El Prado Mz. G LT. 15', 'D19'),
 ('10443055', 'Jack Jonathan', '921058580', 'Asoc. De vivienda Las Mercedes de Puente Piedra .  Mz. E Lote 06', 'D19'),
-('70088438', 'Victor Castillo', '582342576', 'Avenida Naciones Unidas 1729  Chacra RÌos Norte', 'D13'),
+('70088438', 'Victor Castillo', '582342576', 'Avenida Naciones Unidas 1729  Chacra R√≠os Norte', 'D13'),
 ('06752457', 'Alex Valdivia', '945945372', 'Alameda Los Horizontes 212', 'D20'),
 ('99383643', 'Olson Harold', '426207611', ' Avenida Jorge Vanderghen 241', 'D01'),
-('25045033', 'Jason Derullo', '126033207', ' Avenida VÌctor Alzamora 225', 'D22'),
-('32137695', 'Graciela Andrea', '288523852', ' Avenida Nicol·s Arriola 3050', 'D21'),
-('87591024', 'Andrea MaguiÒa', '716072398', ' Coronel Casimiro de la Fuente NegrÛn 390', 'D09'),
+('25045033', 'Jason Derullo', '126033207', ' Avenida V√≠ctor Alzamora 225', 'D22'),
+('32137695', 'Graciela Andrea', '288523852', ' Avenida Nicol√°s Arriola 3050', 'D21'),
+('87591024', 'Andrea Magui√±a', '716072398', ' Coronel Casimiro de la Fuente Negr√≥n 390', 'D09'),
 ('17515879', 'Elizabeth Nieves', '613781584', ' Jiron Pastaza 1071', 'D23'),
-('08328164', 'Jaime DÌaz', '280644051', ' Avenida Tomas Marsano 3637', 'D07'),
-('10763024', 'Valery GoÒez', '921084251', ' Avenida La Molina Este 4265  Urb. Sol De La Molina', 'D08'),
+('08328164', 'Jaime D√≠az', '280644051', ' Avenida Tomas Marsano 3637', 'D07'),
+('10763024', 'Valery Go√±ez', '921084251', ' Avenida La Molina Este 4265  Urb. Sol De La Molina', 'D08'),
 ('21286924', 'Pablo Aira', '113763515', ' Avenida Separadora Industrial 3278  Mayorazgo Chico, Ate - Lima', 'D12'),
 ('48767073', 'Yeni Ortega', '831650440', ' Avenida Manuel Tovar 430', 'D01'),
-('75065778', 'Vivian Prado', '406957047', ' Avenida Isabel La CatÛlica 340', 'D09'),
+('75065778', 'Vivian Prado', '406957047', ' Avenida Isabel La Cat√≥lica 340', 'D09'),
 ('93296373', 'Mariela Ardela', '329691489', ' Avenida Principal 503', 'D22'),
 ('32131107', 'Angie Nestares', '429477524', ' Avenida Nicolas Arriola 2324', 'D21'),
-('01102644', 'Guadalupe Trinidad', '795788612', ' Avenida Tom·s Marsano 4203', 'D07'),
+('01102644', 'Guadalupe Trinidad', '795788612', ' Avenida Tom√°s Marsano 4203', 'D07'),
 ('24951899', 'Angelica Cadenillas', '738041696', ' Pasaje Mario Urteaga 153', 'D11'),
 ('24466185', 'Nicole Ipanaque', '455137997', ' Avenida Abraham Lincoln 377  Altura 19 Av. La Mar', 'D03'),
-('25215957', 'Manuel Buenaventura', '295745970', ' Jiron JosÈ Orengo 850', 'D21'),
+('25215957', 'Manuel Buenaventura', '295745970', ' Jiron Jos√© Orengo 850', 'D21'),
 ('83884517', 'Jhair Namuche', '867666383', ' Jiron Emilio Althaus 788', 'D24'),
 ('79094687', 'Alejandra De la Cruz', '532910111', 'Avenida General Garzon 1558', 'D25'),
 ('83511279', 'Jorge Palma', '042856504', 'Jiron Antonio Raymondi 326  Interior 113', 'D09'),
 ('00273096', 'Johan Adriazola', '555102207', 'Avenida ferrocarril s/n  Mz. H Lt. 7', 'D26'),
 ('67140654', 'Yovana Chinga', '762951515', 'Calle Bajada Balta 159  Alt. Cdra. 1 Av. Schell', 'D01'),
 ('81769040', 'Roxana Castillo', '834197140', ' Avenida Canevaro 1085', 'D24'),
-('65451037', 'Diana Flores', '871611587', ' Avenida NÈstor Gambeta 6855  Prov. Const. Del Callao', 'D06'),
+('65451037', 'Diana Flores', '871611587', ' Avenida N√©stor Gambeta 6855  Prov. Const. Del Callao', 'D06'),
 ('20091861', 'Luis Carlos Rejas', '370225855', ' Avenida La Molina 492', 'D12'),
 ('92322743', 'Nataly Espinoza', '217334328', ' Jiron Domingo Orue 792', 'D22'),
-('31330220', 'Anderson CerrÛn', '062166445', ' Calle Los M·rtires Mz O L  Pj. Mateo Pumacahua', 'D07'),
-('03732151', 'LucÌa Melendez', '940629037', ' Urbanizacion La Cruceta Bloque  Dpto 501', 'D07'),
-('86783966', 'Esther Saavedra', '557581011', ' Calle Volc·n Misti Mz.H13 Lt.1C  Urb. Las Delicias de Villa', 'D20'),
-('30386606', 'Antuannet Merino', '201369891', ' Avenida Paseo de la Rep˙blica 291  Ofic. 701. Edif. Anglo-Peruano.', 'D13'),
+('31330220', 'Anderson Cerr√≥n', '062166445', ' Calle Los M√°rtires Mz O L  Pj. Mateo Pumacahua', 'D07'),
+('03732151', 'Luc√≠a Melendez', '940629037', ' Urbanizacion La Cruceta Bloque  Dpto 501', 'D07'),
+('86783966', 'Esther Saavedra', '557581011', ' Calle Volc√°n Misti Mz.H13 Lt.1C  Urb. Las Delicias de Villa', 'D20'),
+('30386606', 'Antuannet Merino', '201369891', ' Avenida Paseo de la Rep√∫blica 291  Ofic. 701. Edif. Anglo-Peruano.', 'D13'),
 ('72660486', 'Luis Carlos Burga', '452032156', ' Avenida Iquitos 110  Tda 117', 'D09'),
 ('09768561', 'Liliana Moreno', '312994716', ' Jiron Leoncio Prado 1098', 'D05');
+-- INSERTANDO COMPRA
+INSERT INTO COMPRA VALUES
+('7736347591234','BOLETA', '27594637804', 'EMP01','EFECTIVO', '2002-10-14', '2002-10-14', '2002-10-16', 5600.00);
+
+
