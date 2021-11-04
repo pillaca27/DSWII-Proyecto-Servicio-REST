@@ -24,7 +24,7 @@ public class MarcaController {
 	@Autowired
 	private MarcaService marcaService;
 	
-	@GetMapping("/lista")
+	@GetMapping("/listar")
 	public List<Marca> listar(){
 		return marcaService.listAll();
 	}
