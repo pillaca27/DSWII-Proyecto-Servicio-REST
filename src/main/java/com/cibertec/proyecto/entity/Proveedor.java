@@ -13,9 +13,9 @@ public class Proveedor {
 
 	@Id
 	@Column(name = "ruc")
-	private String RUC;
+	private String ruc;
 	@Column(name = "nombre")
-	private String NOMBRE;
+	private String nombre;
 	@Column(name = "nombre_contacto")
 	private String Nombre_CONT;
 	@Column(name = "telefono_contacto")
@@ -27,20 +27,22 @@ public class Proveedor {
 	@JoinColumn(name = "codDis")
 	private Distrito distrito;
 
-	public String getRUC() {
-		return RUC;
+	
+
+	public String getRuc() {
+		return ruc;
 	}
 
-	public void setRUC(String rUC) {
-		RUC = rUC;
+	public void setRuc(String ruc) {
+		this.ruc = ruc;
 	}
 
-	public String getNOMBRE() {
-		return NOMBRE;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNOMBRE(String nOMBRE) {
-		NOMBRE = nOMBRE;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getNombre_CONT() {
