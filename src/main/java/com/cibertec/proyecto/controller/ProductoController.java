@@ -22,7 +22,7 @@ public class ProductoController {
 	@Autowired
 	private ProductoService productoService;
 	
-	@RequestMapping("/lista")
+	@RequestMapping("/listar")
 	public List<Producto> listarProductos(){
 		return productoService.listAll();
 	}
