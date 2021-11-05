@@ -17,17 +17,15 @@ public class Proveedor {
 	@Column(name = "nombre")
 	private String nombre;
 	@Column(name = "nombre_contacto")
-	private String Nombre_CONT;
+	private String nombre_cont;
 	@Column(name = "telefono_contacto")
-	private String Nombre_TEL;
+	private String telefono;
 	@Column(name = "direccion")
-	private String Direccion;
+	private String direccion;
 	
 	@ManyToOne
 	@JoinColumn(name = "codDis")
 	private Distrito distrito;
-
-	
 
 	public String getRuc() {
 		return ruc;
@@ -45,28 +43,28 @@ public class Proveedor {
 		this.nombre = nombre;
 	}
 
-	public String getNombre_CONT() {
-		return Nombre_CONT;
+	public String getNombre_cont() {
+		return nombre_cont;
 	}
 
-	public void setNombre_CONT(String nombre_CONT) {
-		Nombre_CONT = nombre_CONT;
+	public void setNombre_cont(String nombre_cont) {
+		this.nombre_cont = nombre_cont;
 	}
 
-	public String getNombre_TEL() {
-		return Nombre_TEL;
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setNombre_TEL(String nombre_TEL) {
-		Nombre_TEL = nombre_TEL;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	public String getDireccion() {
-		return Direccion;
+		return direccion;
 	}
 
 	public void setDireccion(String direccion) {
-		Direccion = direccion;
+		this.direccion = direccion;
 	}
 
 	public Distrito getDistrito() {
@@ -76,9 +74,7 @@ public class Proveedor {
 	public void setDistrito(Distrito distrito) {
 		this.distrito = distrito;
 	}
-	
-	
-	
+
 	
 	
 	

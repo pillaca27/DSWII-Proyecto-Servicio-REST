@@ -16,7 +16,6 @@ import com.cibertec.proyecto.service.ProveedorService;
 import com.cibertec.proyecto.entity.Proveedor;
 
 @CrossOrigin(origins = {"*"})
-
 @RestController
 @RequestMapping("/proveedor")
 public class ProveedorController {
