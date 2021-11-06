@@ -32,5 +32,9 @@ public class EmpleadoService{
 		return empleadoDAO.findEmpleadoByCargo(codCargo);
 	}
 
+	public Empleado buscarPorCodigo(String cod) {
+		return empleadoDAO.findById(cod).orElse(null);
+	}
+
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.proyecto.entity.Cliente;
+import com.cibertec.proyecto.entity.Empleado;
 import com.cibertec.proyecto.service.ClienteService;
 
 @CrossOrigin(origins = {"*"})
@@ -45,5 +48,15 @@ public class ClienteController {
 	@GetMapping("/consultaCliente/{codDis}")
 	public List<Cliente> consultaPorDistrito(@PathVariable("codDis") String cod){
 		return clienteService.buscarClientesPorDistrito(cod);
+	}
+	
+	@GetMapping("/buscar/{codigo}")
+	public ResponseEntity<Cliente> buscar(@PathVariable("codigo") String cod) throws Exception{
+		Cliente bean= clienteService.buscarPorCodigo(cod);
+		if(bean==null)
+			throw new Exception("CÃ³digo no existe..");
+		
+		
+		return new ResponseEntity<>(bean,HttpStatus.OK);
 	}
 }

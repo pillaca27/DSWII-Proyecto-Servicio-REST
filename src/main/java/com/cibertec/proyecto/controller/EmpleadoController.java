@@ -3,6 +3,8 @@ package com.cibertec.proyecto.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +43,16 @@ public class EmpleadoController {
 	@GetMapping("/consultaEmpleado/{codCargo}")
 	public List<Empleado> consulta(@PathVariable("codCargo") String nom){
 		return empleadoService.buscarEmpleadosPorCargo(nom);
+	}
+	
+	@GetMapping("/buscar/{codigo}")
+	public ResponseEntity<Empleado> buscar(@PathVariable("codigo") String cod) throws Exception{
+		Empleado bean= empleadoService.buscarPorCodigo(cod);
+		if(bean==null)
+			throw new Exception("CÃ³digo no existe..");
+		
+		
+		return new ResponseEntity<>(bean,HttpStatus.OK);
 	}
 
 }
