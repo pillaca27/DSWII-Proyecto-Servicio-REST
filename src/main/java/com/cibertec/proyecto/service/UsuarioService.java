@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.cibertec.proyecto.entity.Empleado;
 import com.cibertec.proyecto.entity.Usuario;
 import com.cibertec.proyecto.repository.UsuarioDAO;
 
@@ -34,4 +35,10 @@ public class UsuarioService {
 	public Usuario iniciaSesion(String vLogin) {
 		return usuarioDAO.iniciarSesion(vLogin);
 	}
+	
+
+	public Usuario buscarPorCodigo(String cod) {
+		return usuarioDAO.findById(cod).orElse(null);
+	}
+
 }

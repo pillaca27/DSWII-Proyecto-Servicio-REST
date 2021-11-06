@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cibertec.proyecto.entity.Marca;
 import com.cibertec.proyecto.entity.Proveedor;
 import com.cibertec.proyecto.repository.ProveedorDAO;
 
@@ -24,4 +25,9 @@ public class ProveedorService {
 	public void eliminar(String id) {
 			lisProveedorDAO.deleteById(id);
 	}
+	
+	public Proveedor buscarPorCodigo(String cod) {
+		return lisProveedorDAO.findById(cod).orElse(null);
+	}
+	
 }

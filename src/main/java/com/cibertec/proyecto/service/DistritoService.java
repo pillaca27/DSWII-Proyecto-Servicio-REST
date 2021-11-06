@@ -16,4 +16,6 @@ public class DistritoService {
 	 public List<Distrito> listAll(){
 		 return distritoDAO.findAll();
 	 }
+	 
+	 
 }

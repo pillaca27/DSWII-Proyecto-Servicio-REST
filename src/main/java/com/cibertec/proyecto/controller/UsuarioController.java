@@ -42,4 +42,6 @@ public class UsuarioController {
 	public Usuario listadoUserName(@PathVariable("nombre") String vlogin){
 		return usuarioService.iniciaSesion(vlogin);
 	}
+	
+	
 }

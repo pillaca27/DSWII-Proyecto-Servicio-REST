@@ -42,7 +42,7 @@ public class CargoController {
 		@PutMapping("/actualizar")
 		public void actualizar(@RequestBody Cargo car) throws Exception {
 			Cargo bean;
-			bean=cargoService.buscar(car.getCodCargo());
+			bean=cargoService.buscarPorCodigo(car.getCodCargo());
 			if(bean==null)
 				throw new Exception("CÃ³digo no existe..");
 			else
@@ -51,7 +51,7 @@ public class CargoController {
 		}
 		@GetMapping("/buscar/{codigo}")
 		public void buscar(@PathVariable("codigo") String cod) throws Exception{
-			Cargo bean=cargoService.buscar(cod);
+			Cargo bean=cargoService.buscarPorCodigo(cod);
 			if(bean==null)
 				throw new Exception("CÃ³digo no existe..");
 			

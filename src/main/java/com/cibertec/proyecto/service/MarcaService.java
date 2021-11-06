@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cibertec.proyecto.entity.Empleado;
 import com.cibertec.proyecto.entity.Marca;
 import com.cibertec.proyecto.repository.MarcaDAO;
 
@@ -25,4 +26,4 @@ public class MarcaService {
 	public void eliminar(String id) {
 		marcaDAO.deleteById(id);
 	}
-}
+	}

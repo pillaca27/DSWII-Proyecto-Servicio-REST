@@ -26,7 +26,7 @@ public class CargoService {
 			cargoDAO.deleteById(id);
 		}
 		
-		public Cargo buscar(String id) {
+		public Cargo buscarPorCodigo(String id) {
 			 return cargoDAO.findById(id).orElse(null);
 
 			
