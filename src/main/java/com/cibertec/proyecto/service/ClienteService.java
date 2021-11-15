@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cibertec.proyecto.entity.Cliente;
-import com.cibertec.proyecto.entity.Empleado;
 import com.cibertec.proyecto.repository.ClienteDAO;
 
 @Service

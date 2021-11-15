@@ -1,13 +1,22 @@
 package com.cibertec.proyecto.entity;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "COMPRA")
@@ -16,28 +25,46 @@ public class Compra {
 	@Column(name = "cod_bo")
 	private String codBol;
 	@Column(name = "tipo_compro")
-	private String TipoCompra;
-
-	
+	private String tipoCompra;
 	@Column(name = "tipo_pago")
-	private String Tipo_Pago;
+	private String tipoPago;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "fecha_emi")
-	private Date F_Emision;
+	private Date emision;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "fecha_reparto")
-	private Date F_Reparto;
+	private Date reparto;
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "vencimiento")
-	private Date Vencim;
+	private Date vencim;
 	@Column(name = "monto")
 	private double mont;
 	
-	
-	@ManyToOne
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ruc")
 	private Proveedor proveedor;
 	
-	@ManyToOne
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cod_emp")
 	private Empleado empleado;
+	
+	@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compra")
+    private List<CompraDetalle> detallesCompra;
+ 
+
+	public List<CompraDetalle> getDetallesCompra() {
+		return detallesCompra;
+	}
+
+	public void setDetallesCompra(List<CompraDetalle> detallesCompra) {
+		this.detallesCompra = detallesCompra;
+	}
 
 	public String getCodBol() {
 		return codBol;
@@ -48,45 +75,43 @@ public class Compra {
 	}
 
 	public String getTipoCompra() {
-		return TipoCompra;
+		return tipoCompra;
 	}
 
 	public void setTipoCompra(String tipoCompra) {
-		TipoCompra = tipoCompra;
+		this.tipoCompra = tipoCompra;
 	}
 
-	
-
-	public String getTipo_Pago() {
-		return Tipo_Pago;
+	public String getTipoPago() {
+		return tipoPago;
 	}
 
-	public void setTipo_Pago(String tipo_Pago) {
-		Tipo_Pago = tipo_Pago;
+	public void setTipoPago(String tipoPago) {
+		this.tipoPago = tipoPago;
 	}
 
-	public Date getF_Emision() {
-		return F_Emision;
+	public Date getEmision() {
+		return emision;
 	}
 
-	public void setF_Emision(Date f_Emision) {
-		F_Emision = f_Emision;
+	public void setEmision(Date emision) {
+		this.emision = emision;
 	}
 
-	public Date getF_Reparto() {
-		return F_Reparto;
+	public Date getReparto() {
+		return reparto;
 	}
 
-	public void setF_Reparto(Date f_Reparto) {
-		F_Reparto = f_Reparto;
+	public void setReparto(Date reparto) {
+		this.reparto = reparto;
 	}
 
 	public Date getVencim() {
-		return Vencim;
+		return vencim;
 	}
 
 	public void setVencim(Date vencim) {
-		Vencim = vencim;
+		this.vencim = vencim;
 	}
 
 	public double getMont() {
