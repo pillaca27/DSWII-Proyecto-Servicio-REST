@@ -40,6 +40,18 @@ public class VentaDetallePK implements Serializable{
 			return false;
 		return true;
 	}
+	public String getCod_notaped() {
+		return cod_notaped;
+	}
+	public void setCod_notaped(String cod_notaped) {
+		this.cod_notaped = cod_notaped;
+	}
+	public String getCod_pro() {
+		return cod_pro;
+	}
+	public void setCod_pro(String cod_pro) {
+		this.cod_pro = cod_pro;
+	}
 	
 	
 	
