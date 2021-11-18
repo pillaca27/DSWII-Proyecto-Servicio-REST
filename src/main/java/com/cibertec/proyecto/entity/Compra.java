@@ -41,7 +41,7 @@ public class Compra {
 	@Column(name = "vencimiento")
 	private Date vencim;
 	@Column(name = "monto")
-	private double mont;
+	private double monto;
 	
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -114,12 +114,12 @@ public class Compra {
 		this.vencim = vencim;
 	}
 
-	public double getMont() {
-		return mont;
+	public double getMonto() {
+		return monto;
 	}
 
-	public void setMont(double mont) {
-		this.mont = mont;
+	public void setMonto(double monto) {
+		this.monto = monto;
 	}
 
 	public Proveedor getProveedor() {
