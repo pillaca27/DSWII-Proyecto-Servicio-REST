@@ -29,15 +29,12 @@ public class Compra {
 	@Column(name = "tipo_pago")
 	private String tipoPago;
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "fecha_emi")
 	private Date emision;
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "fecha_reparto")
 	private Date reparto;
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "vencimiento")
 	private Date vencim;
 	@Column(name = "monto")
@@ -113,6 +110,8 @@ public class Compra {
 	public void setVencim(Date vencim) {
 		this.vencim = vencim;
 	}
+
+
 
 	public double getMonto() {
 		return monto;

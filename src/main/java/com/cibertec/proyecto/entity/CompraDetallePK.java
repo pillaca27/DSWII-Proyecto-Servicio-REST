@@ -38,6 +38,18 @@ public class CompraDetallePK implements Serializable {
 			return false;
 		return true;
 	}
+	public String getCod_bo() {
+		return cod_bo;
+	}
+	public void setCod_bo(String cod_bo) {
+		this.cod_bo = cod_bo;
+	}
+	public String getCod_pro() {
+		return cod_pro;
+	}
+	public void setCod_pro(String cod_pro) {
+		this.cod_pro = cod_pro;
+	}
 	
 	
 	
