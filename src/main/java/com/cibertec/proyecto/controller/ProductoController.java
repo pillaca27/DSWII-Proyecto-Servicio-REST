@@ -36,6 +36,11 @@ public class ProductoController {
 		productoService.registrar(bean);
 	}
 	
+	@PostMapping("/actualizastock/{cod}/{cantidad}")
+	public void actualizastock(@PathVariable String cod, @PathVariable Integer cantidad) {
+		productoService.actualizastock(cod, cantidad);
+	}
+	
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable String id) {
 		productoService.eliminar(id);

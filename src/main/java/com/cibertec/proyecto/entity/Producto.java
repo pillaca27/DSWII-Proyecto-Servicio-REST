@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 /**
@@ -12,6 +15,9 @@ import javax.persistence.Table;
  *
  */
 @Entity
+@NamedStoredProcedureQuery(name = "Producto.actualizacion", procedureName = "actualizacion", parameters = {
+		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "cod", type = String.class),
+		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "cantidad", type = Integer.class) })
 @Table(name = "producto")
 public class Producto {
 

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cibertec.proyecto.entity.Marca;
 import com.cibertec.proyecto.entity.Producto;
 import com.cibertec.proyecto.repository.ProductoDAO;
 
@@ -25,6 +24,11 @@ public class ProductoService {
 
 	public void eliminar(String id) {
 		productoDAO.deleteById(id);
+	}
+	
+	public void actualizastock(String cod, Integer cantidad)
+	{
+		productoDAO.callActualizacion(cod, cantidad);
 	}
 	
 	public Producto buscarPorCodigo(String cod) {
