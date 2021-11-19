@@ -18,6 +18,9 @@ import javax.persistence.Table;
 @NamedStoredProcedureQuery(name = "Producto.actualizacion", procedureName = "actualizacion", parameters = {
 		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "cod", type = String.class),
 		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "cantidad", type = Integer.class) })
+@NamedStoredProcedureQuery(name = "Producto.actualizacionCompra", procedureName = "actualizacionCompra", parameters = {
+		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "cod", type = String.class),
+		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "cantidad", type = Integer.class) })
 @Table(name = "producto")
 public class Producto {
 

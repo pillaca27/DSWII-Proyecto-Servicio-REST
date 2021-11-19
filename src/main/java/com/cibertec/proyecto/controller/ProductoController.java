@@ -41,6 +41,11 @@ public class ProductoController {
 		productoService.actualizastock(cod, cantidad);
 	}
 	
+	@PostMapping("/actualizastockCompra/{cod}/{cantidad}")
+	public void actualizastockCompra(@PathVariable String cod, @PathVariable Integer cantidad) {
+		productoService.actualizastockCompra(cod, cantidad);
+	}
+	
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable String id) {
 		productoService.eliminar(id);

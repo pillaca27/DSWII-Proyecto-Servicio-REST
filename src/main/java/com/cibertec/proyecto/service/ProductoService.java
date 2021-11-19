@@ -31,6 +31,11 @@ public class ProductoService {
 		productoDAO.callActualizacion(cod, cantidad);
 	}
 	
+	public void actualizastockCompra(String cod, Integer cantidad)
+	{
+		productoDAO.callActualizacionCompra(cod, cantidad);
+	}
+	
 	public Producto buscarPorCodigo(String cod) {
 		return productoDAO.findById(cod).orElse(null);
 	}

@@ -9,5 +9,8 @@ public interface ProductoDAO extends JpaRepository<Producto, String>{
 	
 	@Procedure(procedureName = "actualizacion")
 	public void callActualizacion(String cod, Integer cantidad);
+	
+	@Procedure(procedureName = "actualizacionCompra")
+	public void callActualizacionCompra(String cod, Integer cantidad);
 
 }
