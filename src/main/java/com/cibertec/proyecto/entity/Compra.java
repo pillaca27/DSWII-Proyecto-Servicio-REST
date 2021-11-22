@@ -30,12 +30,15 @@ public class Compra {
 	private String tipoPago;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fecha_emi")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date emision;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "fecha_reparto")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date reparto;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "vencimiento")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date vencim;
 	@Column(name = "monto")
 	private double monto;

@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -25,6 +26,7 @@ public class Venta {
 	private String codigo;
 	
 	@Column(name = "fecha_ped")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date fecha_ped;
 	
 	@Column(name = "monto")
