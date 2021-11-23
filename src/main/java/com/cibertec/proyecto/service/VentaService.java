@@ -26,4 +26,8 @@ public class VentaService {
 		ventaDAO.deleteById(id);
 	}
 
+	public Venta buscarPorCodigo(String cod) {
+		return ventaDAO.findById(cod).orElse(null);
+	}
+
 }

@@ -3,6 +3,8 @@ package com.cibertec.proyecto.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,20 +25,25 @@ import com.cibertec.proyecto.service.VentaService;
 
 public class DetalleVentaController {
 	@Autowired
-	private DetalleVentaService ventaService;
+	private DetalleVentaService detalleventaService;
 	
 	@GetMapping("/lista")
 	public List<VentaDetalle> listado(){
-		return ventaService.listadoVenta();
+		return detalleventaService.listadoVenta();
 	}
 	
 	@PostMapping("/registrar")
 	public void registrar(@RequestBody VentaDetalle bean) {
-		ventaService.registrar(bean);
+		detalleventaService.registrar(bean);
 	}
 	
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable String id) {
-		ventaService.eliminar(id);
+		detalleventaService.eliminar(id);
+	}
+	
+	@GetMapping("/buscar/{codigo}")
+	public List<VentaDetalle> buscar(@PathVariable("codigo") String cod) throws Exception{
+		return detalleventaService.buscarPorCodnotaped(cod);
 	}
 }

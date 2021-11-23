@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cibertec.proyecto.entity.Venta;
 import com.cibertec.proyecto.entity.VentaDetalle;
 import com.cibertec.proyecto.repository.DetalleVentaDAO;
 
 @Service
-
 public class DetalleVentaService {
+	
 	@Autowired
 	private DetalleVentaDAO ventaDAO;
 	
@@ -24,6 +25,10 @@ public class DetalleVentaService {
 
 	public void eliminar(String id) {
 		ventaDAO.deleteById(id);
+	}
+
+	public List<VentaDetalle> buscarPorCodnotaped(String cod) {
+		return ventaDAO.findcodigobyventa(cod);
 	}
 	
 	
