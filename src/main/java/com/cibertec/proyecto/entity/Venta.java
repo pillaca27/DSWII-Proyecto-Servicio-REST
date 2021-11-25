@@ -10,7 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -18,6 +21,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@NamedStoredProcedureQuery(name = "Venta.getVentaPerEmployee", procedureName = "getVentaPerEmployee", parameters = {
+		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "cod", type = String.class) })
+
 @Table(name = "Venta")
 public class Venta {
 

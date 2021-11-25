@@ -51,4 +51,13 @@ public class VentaController {
 		return new ResponseEntity<>(bean,HttpStatus.OK);
 	}
 
+	@GetMapping("/buscaremp/{cod}")
+	public List<Venta> search(@PathVariable("cod") String cod)throws Exception{
+		if (ventaService.listaPerDni(cod)==null)
+
+	throw new Exception("Codigo no existe..");
+		return ventaService.listaPerDni(cod);
+
+
+	}
 }

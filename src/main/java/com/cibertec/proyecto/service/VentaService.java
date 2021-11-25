@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cibertec.proyecto.entity.Producto;
 import com.cibertec.proyecto.entity.Venta;
 import com.cibertec.proyecto.repository.VentaDAO;
 
@@ -29,5 +30,7 @@ public class VentaService {
 	public Venta buscarPorCodigo(String cod) {
 		return ventaDAO.findById(cod).orElse(null);
 	}
-
+	public List<Venta> listaPerDni(String cod){
+		return ventaDAO.callPerDni(cod);
+	}
 }
