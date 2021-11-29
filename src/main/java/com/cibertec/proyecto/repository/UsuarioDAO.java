@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.cibertec.proyecto.entity.Usuario;
 
-public interface UsuarioDAO extends JpaRepository<Usuario, String>{
+public interface UsuarioDAO extends JpaRepository<Usuario, Integer>{
 	
 	@Query("select u from Usuario u where u.usuario=?1")
 	public Usuario iniciarSesion(String usuario);

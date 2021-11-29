@@ -28,7 +28,7 @@ public class UsuarioService {
 		usuarioDAO.save(bean);
 	}
 
-	public void eliminar(String id) {
+	public void eliminar(int id) {
 		usuarioDAO.deleteById(id);
 	}
 	
@@ -37,7 +37,7 @@ public class UsuarioService {
 	}
 	
 
-	public Usuario buscarPorCodigo(String cod) {
+	public Usuario buscarPorCodigo(int cod) {
 		return usuarioDAO.findById(cod).orElse(null);
 	}
 
