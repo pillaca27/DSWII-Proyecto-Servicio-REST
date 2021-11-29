@@ -23,7 +23,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @NamedStoredProcedureQuery(name = "Venta.getVentaPerEmployee", procedureName = "getVentaPerEmployee", parameters = {
 		  @StoredProcedureParameter(mode = ParameterMode.IN, name = "cod", type = String.class) })
-
+@NamedStoredProcedureQuery(name = "Marca.sp_Generar_Venta", procedureName = "sp_Generar_Venta", parameters = {
+		  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_codigo", type = String.class) })
 @Table(name = "Venta")
 public class Venta {
 

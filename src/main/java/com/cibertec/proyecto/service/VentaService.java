@@ -33,4 +33,8 @@ public class VentaService {
 	public List<Venta> listaPerDni(String cod){
 		return ventaDAO.callPerDni(cod);
 	}
+
+	public String generarcodigo() {
+		return ventaDAO.callGenerarCodigo();
+	}
 }

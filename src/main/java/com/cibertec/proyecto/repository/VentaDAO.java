@@ -13,6 +13,9 @@ public interface VentaDAO extends JpaRepository<Venta, String>{
 
 	@Query("select v from Venta v where dni=?1")
 	public List<Venta> callPerDni(String cod);
+
+	@Procedure(procedureName = "sp_Generar_Venta")
+	public String callGenerarCodigo();
 	
 	
 }
