@@ -35,6 +35,10 @@ public class ProductoService {
 	{
 		productoDAO.callActualizacionCompra(cod, cantidad);
 	}
+	public String generarcodigo()
+	{
+		return productoDAO.callGenerarCodigo();
+	}
 	
 	public Producto buscarPorCodigo(String cod) {
 		return productoDAO.findById(cod).orElse(null);

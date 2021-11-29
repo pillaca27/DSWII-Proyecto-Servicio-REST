@@ -32,6 +32,8 @@ public class CargoController {
 		
 		@PostMapping("/registrar")
 		public void registrar(@RequestBody Cargo bean) {
+			String codigogenerado = cargoService.generarcodigo();
+			bean.setCodCargo(codigogenerado);
 			cargoService.registrar(bean);
 		}
 		@DeleteMapping("/eliminar/{id}")

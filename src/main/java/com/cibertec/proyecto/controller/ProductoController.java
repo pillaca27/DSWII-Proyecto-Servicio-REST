@@ -33,6 +33,8 @@ public class ProductoController {
 	
 	@PostMapping("/registrar")
 	public void registrar(@RequestBody Producto bean) {
+		String codigogenerado = productoService.generarcodigo();
+		bean.setCodigo(codigogenerado);
 		productoService.registrar(bean);
 	}
 	

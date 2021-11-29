@@ -34,5 +34,8 @@ public class CargoService {
 		public List<Cargo> listNombreLike(String nombre){
 			return cargoDAO.buscaCargoNombre(nombre+"%");
 		}
+		public String generarcodigo() {
+			return cargoDAO.callGenerarCodigo();
+		}
 
 }

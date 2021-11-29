@@ -26,4 +26,9 @@ public class MarcaService {
 	public void eliminar(String id) {
 		marcaDAO.deleteById(id);
 	}
+
+	public String generarcodigo() {
+		return marcaDAO.callGenerarCodigo();
 	}
+	
+}

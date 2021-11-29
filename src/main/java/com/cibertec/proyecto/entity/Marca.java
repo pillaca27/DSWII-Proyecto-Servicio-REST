@@ -5,7 +5,10 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 
 @Entity
+@NamedStoredProcedureQuery(name = "Marca.sp_Generar_Marca", procedureName = "sp_Generar_Marca", parameters = {
+		  @StoredProcedureParameter(mode = ParameterMode.OUT, name = "p_codigo", type = String.class) })
 @Table(name = "marca")
 public class Marca {
 

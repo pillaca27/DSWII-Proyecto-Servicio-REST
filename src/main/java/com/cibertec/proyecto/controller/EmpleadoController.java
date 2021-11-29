@@ -33,6 +33,8 @@ public class EmpleadoController {
 	
 	@PostMapping("/registrar")
 	public void registrar(@RequestBody Empleado bean) {
+		String codigogenerado = empleadoService.generarcodigo();
+		bean.setCodEmp(codigogenerado);
 		empleadoService.registrar(bean);
 	}
 	

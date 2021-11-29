@@ -36,5 +36,9 @@ public class EmpleadoService{
 		return empleadoDAO.findById(cod).orElse(null);
 	}
 
+	public String generarcodigo() {
+		return empleadoDAO.callGenerarCodigo();
+	}
+
 
 }
