@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cibertec.proyecto.entity.Cliente;
+import com.cibertec.proyecto.entity.Producto;
 import com.cibertec.proyecto.repository.ClienteDAO;
 
 @Service
@@ -34,6 +35,10 @@ public class ClienteService {
 	public Cliente buscarPorCodigo(String cod) {
 		
 		return clienteDAO.findById(cod).orElse(null);
+	}
+	public List<Cliente> listNombreLike(String nombre) {
+
+		return clienteDAO.buscaClienteNombre(nombre+"%");
 	}
 
 }

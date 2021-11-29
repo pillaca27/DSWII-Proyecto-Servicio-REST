@@ -16,5 +16,8 @@ public interface EmpleadoDao extends JpaRepository<Empleado, String>{
 	@Procedure(procedureName = "sp_Generar_Empleado")
 	public String callGenerarCodigo();
 
+	@Query("select p from Empleado p where p.nombre like ?1") 
+	public List<Empleado> buscaEmpleadoNombre(String string);
+
 	
 }

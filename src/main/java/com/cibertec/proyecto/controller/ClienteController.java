@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.proyecto.entity.Cliente;
 import com.cibertec.proyecto.entity.Empleado;
+import com.cibertec.proyecto.entity.Producto;
 import com.cibertec.proyecto.service.ClienteService;
 
 @CrossOrigin(origins = {"*"})
@@ -58,5 +59,11 @@ public class ClienteController {
 		
 		
 		return new ResponseEntity<>(bean,HttpStatus.OK);
+	}
+	
+	@GetMapping("/listar/{nombre}")
+	public List<Cliente> consultacargo(@PathVariable("nombre") String nombre){
+		return clienteService.listNombreLike(nombre);
+		//return "empleado/consultaCargo";
 	}
 }

@@ -29,5 +29,8 @@ public class ProveedorService {
 	public Proveedor buscarPorCodigo(String cod) {
 		return lisProveedorDAO.findById(cod).orElse(null);
 	}
+	public List<Proveedor> listNombreLike(String nombre) {
+		return lisProveedorDAO.buscaProveedorNombre(nombre+"%");
+	}
 	
 }

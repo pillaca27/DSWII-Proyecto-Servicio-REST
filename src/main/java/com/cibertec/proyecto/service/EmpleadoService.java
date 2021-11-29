@@ -40,5 +40,9 @@ public class EmpleadoService{
 		return empleadoDAO.callGenerarCodigo();
 	}
 
+	public List<Empleado> listNombreLike(String nombre) {
+		return empleadoDAO.buscaEmpleadoNombre(nombre+"%");
+	}
+
 
 }

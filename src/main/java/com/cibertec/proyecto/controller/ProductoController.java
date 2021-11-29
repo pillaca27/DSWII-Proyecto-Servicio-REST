@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cibertec.proyecto.entity.Cargo;
 import com.cibertec.proyecto.entity.Empleado;
 import com.cibertec.proyecto.entity.Producto;
 import com.cibertec.proyecto.service.ProductoService;
@@ -62,6 +63,12 @@ public class ProductoController {
 		
 		
 		return new ResponseEntity<>(bean,HttpStatus.OK);
+	}
+	
+	@GetMapping("/listar/{nombre}")
+	public List<Producto> consultacargo(@PathVariable("nombre") String nombre){
+		return productoService.listNombreLike(nombre);
+		//return "empleado/consultaCargo";
 	}
 	
 }

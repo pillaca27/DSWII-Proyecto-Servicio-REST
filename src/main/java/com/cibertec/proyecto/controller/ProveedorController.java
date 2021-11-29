@@ -53,5 +53,11 @@ public class ProveedorController {
 		return new ResponseEntity<>(bean,HttpStatus.OK);
 	}
 	
+	@GetMapping("/listar/{nombre}")
+	public List<Proveedor> consultacargo(@PathVariable("nombre") String nombre){
+		return proveedorService.listNombreLike(nombre);
+		//return "empleado/consultaCargo";
+	}
+	
 	
 }

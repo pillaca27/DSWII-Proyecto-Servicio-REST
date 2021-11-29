@@ -43,5 +43,9 @@ public class ProductoService {
 	public Producto buscarPorCodigo(String cod) {
 		return productoDAO.findById(cod).orElse(null);
 	}
+
+	public List<Producto> listNombreLike(String nombre) {
+		return productoDAO.buscaProductoNombre(nombre+"%");
+	}
 	
 }
